@@ -1,8 +1,5 @@
-import { useState } from "react";
 import StudentCard from "./StudentCard"
-import StudentDummy from './data'
-const StudentList = () => {
-  const [student, setStudent] = useState(StudentDummy)
+const StudentList = ({student}) => {
   const StudentContainer = {display:'flex', gap:'2rem'};
   return (
     <>
@@ -30,5 +27,4 @@ const StudentList = () => {
     </>
   )
 }
-
 export default StudentList

@@ -1,9 +1,8 @@
-import Counter from "./component/Counter/Counter";
-import StudentList from "./component/Student/studentList";
+import Student from "./component/Student/Student";
 function App() {
   return (
     <>
-      <StudentList/>
+      <Student/>
     </>
   )
 };

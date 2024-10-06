@@ -12,3 +12,4 @@ const StudentDummy=[
       major:"Math"
     }
   ]
+export default StudentDummy 
