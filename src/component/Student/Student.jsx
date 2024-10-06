@@ -1,7 +1,7 @@
-import StudentForm from "./StudentForm"
-import StudentList from "./StudentList"
+import StudentForm from "./StudentForm";
+import StudentList from "./StudentList";
 import { useState } from "react";
-import StudentDummy from './data'
+import StudentDummy from './data';
 const Student = () => {
     const [student, setStudent] = useState(StudentDummy)
     return (
