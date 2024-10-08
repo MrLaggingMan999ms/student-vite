@@ -3,8 +3,8 @@ const StudentList = ({student}) => {
   const StudentContainer = {display:'flex', gap:'2rem'};
   return (
     <>
-        <h1>Student List</h1>
-        <div style={StudentContainer}>
+        <h1 className="text-xl font-bold">Student List</h1>
+        <div className="flex gap-4 flex-wrap mt-4">
           {
             student.map((st, index)=>(
               <StudentCard 
