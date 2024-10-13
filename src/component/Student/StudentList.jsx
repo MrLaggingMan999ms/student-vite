@@ -1,6 +1,7 @@
 import StudentCard from "./StudentCard"
-const StudentList = ({student}) => {
-  const StudentContainer = {display:'flex', gap:'2rem'};
+const StudentList = ({student,setStudent}) => {
+  console.log("render student list")
+  
   return (
     <>
         <h1 className="text-xl font-bold">Student List</h1>
@@ -13,6 +14,7 @@ const StudentList = ({student}) => {
               major={st.major} 
               sID={st.sID} 
               avatar={st.avatar}
+              setStudent={setStudent}
             />
             ))
           }

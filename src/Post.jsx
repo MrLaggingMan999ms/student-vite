@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 
-const Post = () => {
+const Post = ({PCount}) => {
     const [count, setCount] = useState(0);
     const [reFetch, setReFetch] = useState(false)
     
-    const fetchData = async () => {
+    console.log("render post component");
+    
+    const fetchData = async (controller) => {
       try{
-        const res = await fetch("https://jsonplaceholder.typicode.com/posts")
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts",{
+          signal:controller.signal
+      })
         const data = await res.json()
         console.log(data);
       }
@@ -17,22 +21,14 @@ const Post = () => {
 
     useEffect(() => {
     console.log("render effect");
+    const controller = new AbortController();
     // api fetch
     
-    fetchData();
+    fetchData(controller);
+    return()=>{
+      controller.abort();
+    }
     
-    // fetch("https://jsonplaceholder.typicode.com/posts")
-    // .then((res)=>{
-    //     console.log(res);
-        
-    //     return res.json()
-    // })
-    // .then((data)=>{
-    //     console.log(data)
-    // })
-    // .catch((error)=>{
-    //     console.log(error);
-    // })
   },[reFetch]);
 
   const handleScroll=()=>{
@@ -56,8 +52,10 @@ const Post = () => {
     <div>Post
         <button onClick={() => setCount(count + 1)}>Count</button>
         <button onClick={() => setReFetch(true)}>Reload</button>
+        <br />
+        {PCount}
     </div>
   )
 }
 
-export default Post
+export default memo(Post);
