@@ -1,5 +1,6 @@
+import { memo } from "react"
 import StudentCard from "./StudentCard"
-const StudentList = ({student,setStudent}) => {
+const StudentList = ({student,setStudent,handleClick}) => {
   console.log("render student list")
   
   return (
@@ -29,4 +30,4 @@ const StudentList = ({student,setStudent}) => {
     </>
   )
 }
-export default StudentList
+export default memo(StudentList)

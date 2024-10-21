@@ -1,6 +1,6 @@
 import StudentForm from "./StudentForm";
 import StudentList from "./StudentList";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import StudentDummy from './data';
 const Student = () => {
     const [student, setStudent] = useState(StudentDummy)
@@ -14,10 +14,17 @@ const Student = () => {
     
     console.log(totalMark)
     
+    const handleClick = useCallback(() => {
+      console.log("handleClick")
+      
+      //write Logic in this space
+      
+    },[student]);
+     
     return (
     <div>
         <StudentForm setStudent={setStudent}/>
-        <StudentList student={student} setStudent={setStudent}/>
+        <StudentList student={student} setStudent={setStudent} handleClick={handleClick}/>
         <button onClick={() => setClick(click + 1)}>ClickME</button>
     </div>
   )

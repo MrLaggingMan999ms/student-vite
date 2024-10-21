@@ -5,7 +5,7 @@ const StudentForm = ({ setStudent }) => {
   const refName = useRef(null)
   const refAvatar = useRef(null)
   const refMajor = useRef(null)
-  
+
   console.log("render");
   const getID = () => {
     return Math.round(Math.random() * 1000);
