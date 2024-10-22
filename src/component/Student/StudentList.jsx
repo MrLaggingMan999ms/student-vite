@@ -16,7 +16,7 @@ const StudentList = () => {
     <>
         <h1 className="text-xl font-bold">Student List</h1>
         <div className="flex gap-4 flex-wrap mt-4">
-          {
+          {student.length>0 && 
             student.map((st, index)=>(
               <StudentCard 
               key={index}
