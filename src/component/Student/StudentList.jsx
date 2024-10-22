@@ -1,7 +1,7 @@
 import { memo, useContext } from "react"
 import StudentCard from "./StudentCard"
 import { StudentContext } from "../context/StudentProvider"
-const StudentList = ({student,setStudent,handleClick}) => {
+const StudentList = () => {
   console.log("render student list")
   
   const handleDelete=(id)=>{
@@ -9,8 +9,8 @@ const StudentList = ({student,setStudent,handleClick}) => {
     setStudent((prev)=>[...prev.filter(st=>st.sID !=id)])
   }
 
-  const ctxValues = useContext(StudentContext)
-  console.log(ctxValues)
+  const {student,setStudent} = useContext(StudentContext)
+  // console.log(ctxValues)
   
   return (
     <>

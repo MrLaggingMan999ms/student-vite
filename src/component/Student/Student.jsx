@@ -24,7 +24,11 @@ const Student = () => {
     return (
     <div>
         <StudentForm setStudent={setStudent}/>
-        <StudentList student={student} setStudent={setStudent} handleClick={handleClick}/>
+        <StudentList 
+        student={student} 
+        setStudent={setStudent} 
+        handleClick={handleClick}
+        />
         <button onClick={() => setClick(click + 1)}>ClickME</button>
     </div>
   )
