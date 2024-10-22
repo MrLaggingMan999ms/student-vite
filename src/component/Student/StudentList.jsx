@@ -1,7 +1,16 @@
-import { memo } from "react"
+import { memo, useContext } from "react"
 import StudentCard from "./StudentCard"
+import { StudentContext } from "../context/StudentProvider"
 const StudentList = ({student,setStudent,handleClick}) => {
   console.log("render student list")
+  
+  const handleDelete=(id)=>{
+    console.log("Delete", id)
+    setStudent((prev)=>[...prev.filter(st=>st.sID !=id)])
+  }
+
+  const ctxValues = useContext(StudentContext)
+  console.log(ctxValues)
   
   return (
     <>
@@ -16,16 +25,10 @@ const StudentList = ({student,setStudent,handleClick}) => {
               sID={st.sID} 
               avatar={st.avatar}
               setStudent={setStudent}
+              handleDelete={handleDelete}
             />
             ))
           }
-            <StudentCard 
-              name={"KK"} 
-              major={"Math"} 
-              sID={"001"} 
-              avatar={"https://images.rawpixel.com/image_400/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI0LTAxL3Jhd3BpeGVsb2ZmaWNlMTJfcGhvdG9fb2ZfeW91bmdfaW5kaWFuX2dpcmxfaG9sZGluZ19zdHVkZW50X2JhY19hNDdmMzk1OS0zZDAyLTRiZWEtYTEzOS1lYzI0ZjdhNjEwZGFfMS5qcGc.jpg"}
-            />
-            
         </div>
     </>
   )

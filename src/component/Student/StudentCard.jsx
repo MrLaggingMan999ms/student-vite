@@ -1,13 +1,10 @@
 import { memo, useMemo } from 'react'
 
 import cssClass from './studentCard.module.css'
-const StudentCard = ({name, sID, major, avatar, setStudent}) => {
-  
-  const handleDelete=()=>{
-    console.log("Delete", sID)
-    setStudent((prev)=>[...prev.filter(st=>st.sID !=sID)])
-  }
-  
+const StudentCard = ({name, sID, major, avatar, setStudent, handleDelete}) => {
+  const UpdateName = useMemo(() =>{
+    return 'StuKMD'
+  },[name])
   console.log("re-render StudentCard")
  
   return (
@@ -16,7 +13,7 @@ const StudentCard = ({name, sID, major, avatar, setStudent}) => {
           <div>
             <img src={avatar} alt={name} className={cssClass.studentimage}/>
             <div>
-              <h2>{name}</h2>
+              <h2>{UpdateName}-{name}</h2>
               <p>Student ID : {sID}</p>
             </div>
           </div>
@@ -24,7 +21,7 @@ const StudentCard = ({name, sID, major, avatar, setStudent}) => {
         <div className="studentMajor">
           Major : {major}
         </div>
-        <button onClick={handleDelete} className='bg-red-600 text-white rounded-sm p-3'>Delete</button>
+        <button onClick={()=>handleDelete(sID)} className='bg-red-600 text-white rounded-sm p-3'>Delete</button>
     </div>
   )
 }
