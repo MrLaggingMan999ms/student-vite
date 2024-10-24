@@ -16,6 +16,9 @@ const studentReducer = (state, action) => {
       return { ...state, data: action.payload, isLoading: false };
     case "LOADING":
       return { ...state, isLoading: true };
+    // case "ADD_STUDENT":
+    // case "DELETE_STUDENT":
+    // case "UPDATE_STUDENT":
     default:
       return { ...state };
   }
@@ -30,6 +33,9 @@ const StudentProvider = ({ children }) => {
   }, [state.data]);
 
   const fetchStudent = async (signal) => {
+    try {
+      
+    
     const res = await fetch("https://st-api.kaungmyatsoe.dev/api/v1/students", {
       method: "GET",
       headers: {
@@ -42,6 +48,9 @@ const StudentProvider = ({ children }) => {
     console.log(data);
     // Dispatch
     dispatch({ type: "FETCH", payload: data.students });
+  } catch (error) {
+      console.log(error)
+  }
   }
 
   useEffect(() => {
