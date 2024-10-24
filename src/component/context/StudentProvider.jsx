@@ -6,7 +6,6 @@ const initStudent = {
   data: [],
   isLoading: false,
   isError: false,
-  students: [],
 };
 
 const studentReducer = (state, action) => {
@@ -66,7 +65,7 @@ const StudentProvider = ({ children }) => {
   }, []);
 
   return (
-    <StudentContext.Provider value={{ state, dispatch }}>
+    <StudentContext.Provider value={{ student: state, dispatch }}>
       {children}
     </StudentContext.Provider>
   );
