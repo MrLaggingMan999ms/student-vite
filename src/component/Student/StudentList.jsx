@@ -4,17 +4,18 @@ import { StudentContext } from "../context/StudentProvider";
 const StudentList = () => {
   console.log("render student list");
 
-  const { student } = useContext(StudentContext);
+  const { students } = useContext(StudentContext);
   // console.log(ctxValues)
 
+  
   return (
     <>
       <h1 className="text-xl font-bold">Student List</h1>
       <div className="flex gap-4 flex-wrap mt-4">
-        {student.isLoading
+        {students.isLoading
           ? "Loading..."
-          : student.data.length > 0 &&
-            student.data.map((st) => (
+          : students.data.length > 0 &&
+            students.data.map((st) => (
               <StudentCard
                 key={st._id} 
                 name={st.name}

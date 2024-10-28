@@ -8,7 +8,7 @@ const StudentCard = ({name, sID, major, avatar, setStudent, handleDelete}) => {
   console.log("re-render StudentCard")
  
   return (
-    <div className='border p-1 border-stone-950 rounded-xl cursor-pointer hover:bg-sky-500 transition-all duration-500 ease-in-out hover:scale-90 hover:text-white'>
+    <div className='border p-1 border-stone-950 rounded-xl cursor-pointer hover:bg-black transition-all duration-500 ease-in-out hover:scale-90 hover:text-white'>
         <div className='student-header'>
           <div>
             <img src={avatar} alt={name} className={cssClass.studentimage}/>

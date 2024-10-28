@@ -15,7 +15,8 @@ const studentReducer = (state, action) => {
       return { ...state, data: action.payload, isLoading: false };
     case "LOADING":
       return { ...state, isLoading: true };
-    // case "ADD_STUDENT":
+    case "ADD_STUDENT":
+      return {...state, data:[...state.data, action.payload], isLoading: false}
     // case "DELETE_STUDENT":
     // case "UPDATE_STUDENT":
     default:
@@ -65,7 +66,7 @@ const StudentProvider = ({ children }) => {
   }, []);
 
   return (
-    <StudentContext.Provider value={{ student: state, dispatch }}>
+    <StudentContext.Provider value={{ students: state, dispatch }}>
       {children}
     </StudentContext.Provider>
   );
