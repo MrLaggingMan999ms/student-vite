@@ -1,29 +1,84 @@
-import { memo, useMemo } from 'react'
+import { memo, useContext, useMemo, useState } from "react";
+import cssClass from "./studentCard.module.css";
+import { StudentContext } from "../context/StudentProvider";
 
-import cssClass from './studentCard.module.css'
-const StudentCard = ({name, sID, major, avatar, setStudent, handleDelete}) => {
-  const UpdateName = useMemo(() =>{
-    return 'StuKMD'
-  },[name])
-  console.log("re-render StudentCard")
- 
+const StudentCard = ({ student }) => {
+  const { name, studentCode, major, avatar, _id } = student;
+
+  const { dispatch } = useContext(StudentContext);
+
+  const [isDeleting, setisDeleting] = useState(false);
+
+  const deleteStudent = async (sID) => {
+    try {
+      const res = await fetch(
+        "https://st-api.kaungmyatsoe.dev/api/v1/students/" + sID,
+        {
+          method: "DELETE",
+          headers: {
+            key: "43/UgWoJWW8pXKRmM48xYp8uuIXXLaBM1USAblj50X5GrVUdaluW36lEjoAbylSL6m4g9OXOxb9p7teXUyph5w",
+          },
+        }
+      );
+
+      console.log(res);
+
+      if (res.ok) {
+        const data = await res.json();
+        return data.student;
+      }
+
+      return null;
+    } catch (error) {
+      console.log(error);
+      alert("Error");
+      return null;
+    }
+  };
+
+  const handleDelete = async () => {
+    setisDeleting(true);
+
+    const deletedStudent = await deleteStudent(_id);
+
+    if (deleteStudent._id) {
+      dispatch({
+        type: "DELETE_STUDENT",
+        payload: { _id: deletedStudent._id },
+      });
+    }
+    setisDeleting(false);
+    
+  };
+
+  const UpdateName = useMemo(() => {
+    return "StuKMD";
+  }, [name]);
+  
+  console.log("re-render StudentCard");
+
   return (
-    <div className='border p-1 border-stone-950 rounded-xl cursor-pointer hover:bg-black transition-all duration-500 ease-in-out hover:scale-90 hover:text-white'>
-        <div className='student-header'>
+    <div className="border p-1 border-stone-950 rounded-xl cursor-pointer hover:bg-black transition-all duration-500 ease-in-out hover:scale-90 hover:text-white">
+      <div className="student-header">
+        <div>
+          <img src={avatar} alt={name} className={cssClass.studentimage} />
           <div>
-            <img src={avatar} alt={name} className={cssClass.studentimage}/>
-            <div>
-              <h2>{UpdateName}-{name}</h2>
-              <p>Student ID : {sID}</p>
-            </div>
+            <h2>
+              {UpdateName}-{name}
+            </h2>
+            <p>Student ID : {studentCode}</p>
           </div>
         </div>
-        <div className="studentMajor">
-          Major : {major}
-        </div>
-        <button onClick={()=>handleDelete(sID)} className='bg-red-600 text-white rounded-sm p-3'>Delete</button>
+      </div>
+      <div className="studentMajor">Major : {major}</div>
+      <button
+        onClick={handleDelete}
+        className="bg-red-600 text-white rounded-sm p-3"
+      >
+        {isDeleting ? "Processing" : "Delete"}
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default memo(StudentCard)
+export default memo(StudentCard);

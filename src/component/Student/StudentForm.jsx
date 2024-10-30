@@ -15,11 +15,13 @@ const StudentForm = () => {
     refAvatar.current.value = "";
     refName.current.value = "";
     refMajor.current.value = "0";
+    refEmail.current.value = "@gmail.com";
 
   };
 
   const createStudent = async (newStudent) => {
-      console.log(JSON.stringify(newStudent));
+      try {
+        
       
       const res = await fetch(
         "https://st-api.kaungmyatsoe.dev/api/v1/students",
@@ -33,9 +35,16 @@ const StudentForm = () => {
           },
         }
       );
-      
+        if(res.ok){
         const data = await res.json();
         return data.student;
+        }
+        return null
+
+      } catch (error) {
+        alert(error.msg)
+        return null;
+      }
      
   };
   const handleSubmit = async (e) => {
@@ -49,8 +58,8 @@ const StudentForm = () => {
       avatar: refAvatar.current.value,
       email: refEmail.current.value
     };
-    const { name, major, avatar } = newStudent;
-    if ((name, major, avatar)) {
+    const { name, major, avatar, email } = newStudent;
+    if ((name, major, avatar, email)) {
       const createdStudent = await createStudent(newStudent);
       console.log(createdStudent);
 
