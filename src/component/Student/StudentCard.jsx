@@ -1,11 +1,10 @@
-import { memo, useContext, useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import cssClass from "./studentCard.module.css";
-import { StudentContext } from "../context/StudentProvider";
-
+import useStudent from "../../hooks/useStudent";
 const StudentCard = ({ student }) => {
   const { name, studentCode, major, avatar, _id } = student;
 
-  const { dispatch } = useContext(StudentContext);
+  const { dispatch } = useStudent();
 
   const [isDeleting, setisDeleting] = useState(false);
 

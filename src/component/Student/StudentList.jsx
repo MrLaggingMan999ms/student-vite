@@ -1,20 +1,21 @@
 import { memo, useContext } from "react";
 import StudentCard from "./StudentCard";
-import { StudentContext } from "../context/StudentProvider";
+import useStudent from "../../hooks/useStudent";
+
 const StudentList = () => {
   console.log("render student list");
 
-  const { students } = useContext(StudentContext);
-  // console.log(ctxValues)
-
+  const { state } = useStudent();
+  console.log(state);
+  
   return (
     <>
       <h1 className="text-xl font-bold">Student List</h1>
       <div className="flex gap-4 flex-wrap mt-4">
-        {students.isLoading ? (
+        {state.isLoading ? (
           "Loading..."
-        ) : students.data.length > 0 ? (
-          students.data.map((st) => <StudentCard key={st._id} student={st} />)
+        ) : state.data.length > 0 ? (
+          state.data.map((st) => <StudentCard key={st._id} student={st} />)
         ) : (
           <div> No Data</div>
         )}
