@@ -25,7 +25,7 @@ const StudentForm = () => {
         
       
       const res = await fetch(
-        "https://st-api.kaungmyatsoe.dev/api/v1/students",
+        "https://student-api-test.vercel.app/api/v1/students/",
         {
           method: "POST",
           body: JSON.stringify(newStudent),

@@ -22,7 +22,7 @@ const StudentProvider = ({ children }) => {
   const fetchStudent = async (signal) => {
     try {
       const res = await fetch(
-        "https://st-api.kaungmyatsoe.dev/api/v1/students",
+        "https://student-api-test.vercel.app/api/v1/students",
         {
           method: "GET",
           headers: {

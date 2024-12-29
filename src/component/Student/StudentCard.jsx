@@ -1,6 +1,7 @@
 import { memo, useMemo, useState } from "react";
 import cssClass from "./studentCard.module.css";
 import useStudent from "../../hooks/useStudent";
+import { Link } from "react-router-dom";
 const StudentCard = ({ student }) => {
   const { name, studentCode, major, avatar, _id } = student;
 
@@ -11,7 +12,7 @@ const StudentCard = ({ student }) => {
   const deleteStudent = async (sID) => {
     try {
       const res = await fetch(
-        "https://st-api.kaungmyatsoe.dev/api/v1/students/" + sID,
+        "https://student-api-test.vercel.app/api/v1/students/" + sID,
         {
           method: "DELETE",
           headers: {
@@ -47,35 +48,36 @@ const StudentCard = ({ student }) => {
       });
     }
     setisDeleting(false);
-    
   };
 
   const UpdateName = useMemo(() => {
     return "StuKMD";
   }, [name]);
-  
+
   console.log("re-render StudentCard");
 
   return (
     <div className="border p-1 border-stone-950 rounded-xl cursor-pointer hover:bg-black transition-all duration-500 ease-in-out hover:scale-90 hover:text-white">
-      <div className="student-header">
-        <div>
-          <img src={avatar} alt={name} className={cssClass.studentimage} />
+      <Link to={`/student/${student.studentCode}`}>
+        <div className="student-header">
           <div>
-            <h2>
-              {UpdateName}-{name}
-            </h2>
-            <p>Student ID : {studentCode}</p>
+            <img src={avatar} alt={name} className={cssClass.studentimage} />
+            <div>
+              <h2>
+                {UpdateName}-{name}
+              </h2>
+              <p>Student ID : {studentCode}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="studentMajor">Major : {major}</div>
-      <button
-        onClick={handleDelete}
-        className="bg-red-600 text-white rounded-sm p-3"
-      >
-        {isDeleting ? "Processing" : "Delete"}
-      </button>
+        <div className="studentMajor">Major : {major}</div>
+        <button
+          onClick={handleDelete}
+          className="bg-red-600 text-white rounded-sm p-3"
+        >
+          {isDeleting ? "Processing" : "Delete"}
+        </button>
+      </Link>
     </div>
   );
 };
